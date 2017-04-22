@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>i18n-demo</title>
+</head>
+<body>
+  <h1><span translate="hello"></span>&nbsp;<span translate="world"></span></h1>
+  <button id="zh_btn" style="display:none;">中文</button>
+  <button id="en_btn" style="display:none;">English</button>
+
+<script src="jquery/jquery.min.js" charset="utf-8"></script>
+<script src="jquery.i18n.properties/jquery.i18n.properties.min.js" charset="utf-8"></script>
+<script src="i18n.config.js" charset="utf-8"></script>
+<script type="text/javascript">
+  $(function(){
+    if(window.localStorage.getItem("now_lang")){
+      langPkg.loadProperties(window.localStorage.getItem("now_lang"));
+      if(langPkg.now_lang == 0){
+        $('#zh_btn').hide();
+        $('#en_btn').show();
+      }else{
+        $('#zh_btn').show();
+        $('#en_btn').hide();
+      }
+    }else{
+      langPkg.loadProperties(0);
+    }
+
+    // 切换至中文
+    $('#zh_btn').click(function(){
+      langPkg.loadProperties(0);
+      $('#zh_btn').hide();
+      $('#en_btn').show();
+    });
+
+    // 切换至英文
+    $('#en_btn').click(function(){
+      langPkg.loadProperties(1);
+      $('#zh_btn').show();
+      $('#en_btn').hide();
+    });
+  });
+</script>
+</body>
+</html>
